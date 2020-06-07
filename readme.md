@@ -8,3 +8,5 @@ run migrations: python manage.py migrate
 
 run server: python manage.py runserver
 
+create superuser: python manage.py createsuperuser (default: root, iamroot123)
+
