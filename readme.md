@@ -4,6 +4,8 @@ activate venv: source attendance-env/bin/activate
 
 install requirements: pip install -r requirements.txt
 
+save requirements to file: pip freeze > requirements.txt
+
 run migrations: python manage.py migrate
 
 run server: python manage.py runserver
