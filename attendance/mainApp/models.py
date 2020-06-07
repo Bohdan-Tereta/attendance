@@ -42,3 +42,10 @@ class Waypoint(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Minor(models.Model):
+    user_id = models.ForeignKey(
+        User,
+        models.CASCADE
+    )
+    current_grade = models.PositiveSmallIntegerField()
