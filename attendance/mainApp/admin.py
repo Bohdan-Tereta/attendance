@@ -1,5 +1,5 @@
 from django.contrib import admin
-from.models import Device
+from.models import Device, Waypoint
 
 # Register your models here.
 
@@ -12,3 +12,5 @@ class DeviceAdmin(admin.ModelAdmin):
             obj.creator = request.user
         obj.updater = request.user
         super().save_model(request, obj, form, change)
+
+@admin.site.register(Waypoint)

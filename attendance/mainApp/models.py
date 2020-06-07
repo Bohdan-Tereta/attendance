@@ -22,7 +22,7 @@ class Device(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Waypoint(models.Model):
-    device_id = models.ForeignKey(
+    device_id = models.OneToOneField(
         Device,
         models.CASCADE
     )
