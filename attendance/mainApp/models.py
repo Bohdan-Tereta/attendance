@@ -49,3 +49,14 @@ class Minor(models.Model):
         models.CASCADE
     )
     current_grade = models.PositiveSmallIntegerField()
+
+class MinorWaypointHistory(models.Model):
+    minor_id = models.ForeignKey(
+        Minor,
+        models.CASCADE
+    )
+    waypoint_id = models.ForeignKey(
+        Waypoint,
+        models.CASCADE
+    )
+    created_at = models.DateTimeField()
