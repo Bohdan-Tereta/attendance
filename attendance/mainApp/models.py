@@ -8,7 +8,15 @@ class Device(models.Model):
     description  = models.CharField(max_length=50)
     device_type  = models.CharField(max_length=50)  
     disabled = models.BooleanField()
-    #creator = models.ForeignKey(User,on_delete=models.CASCADE,)
-    #updater = LastUserField(on_delete=models.CASCADE,) 
+    creator = models.ForeignKey(
+        User,
+        models.CASCADE,
+        'device_to_user_created'
+    )
+    updater = models.ForeignKey(
+        User,
+        models.CASCADE,
+        'device_to_user_added'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
