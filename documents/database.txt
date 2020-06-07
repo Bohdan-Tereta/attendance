@@ -1,0 +1,133 @@
+Table document_version {
+ version int [default: 2]
+}
+
+Table tenant as empower_tenant {
+  ARE_WE_MULTITENANT varchar
+}
+
+Table empower_device as e_device {
+  id int [pk, increment]
+  code varchar
+  description varchar
+  device_type varchar  
+  disabled boolean
+  creator varchar
+  updater varchar
+  created_at datetime
+  updated_at datetime
+}
+
+Table empower_role as e_role {
+  id int [pk, increment]
+  version int
+  role_name varchar
+  role_description varchar
+}
+
+Table empower_user as e_user {
+  id int [pk, increment] // auto-increment
+  username varchar
+  password varchar
+}
+
+Table empower_user_role as e_user_role {
+  role_id int [not null,ref: > e_role.id]
+  user_id int [not null,ref: > e_user.id]
+}
+
+Table empower_user_account as e_user_account {
+  id int [pk, increment] // auto-increment
+  user_id int [not null,ref: > e_user.id]
+  first_name varchar
+  last_name varchar
+  gender int
+  phone varchar
+  dob varchar
+  address varchar
+  disabled boolean
+  creator varchar
+  updater varchar
+  created_at datetime
+  updated_at datetime
+}
+
+Table empower_waypoint as e_waypoint {
+  id int [pk, increment] // auto-increment
+  device_id int [ref: > e_device.id]
+  code varchar
+  description varchar
+  address varchar
+  disabled boolean
+  creator varchar
+  updater varchar
+  created_at datetime
+  updated_at datetime
+}
+
+Table empower_staff_type as e_staff_type {
+  id int [pk, increment] // auto-increment
+  code varchar
+  description varchar
+}
+
+Table empower_staff as e_staff {
+  id int [pk, increment] // auto-increment
+  user_account_id int [ref: > e_user_account.id]
+  default_staff_type_id int [ref: > e_staff_type.id]
+  is_educator boolean
+}
+
+Table empower_waypoint_staff as e_waypoint_staff {
+  waypoint_id int [ref: > e_waypoint.id]
+  staff_id int [ref: > e_staff.id]
+  staff_type_id int [ref: > e_staff_type.id]
+}
+
+Table empower_minor as e_minor {
+  id int [pk, increment] // auto-increment
+  user_account_id int [ref: > e_user_account.id]
+  current_grade_id int
+  waypoint_id int [not null,ref: > e_waypoint.id]
+}
+
+Table empower_minor_waypoint_history as e_minor_waypoint {
+ minor_id int [ref: > e_minor.id]
+ waypoint_id int [ref: > e_waypoint.id]
+ created_at datetime
+}
+
+Table empower_minor_schedule as e_minor_schedule {
+  id int [pk, increment]
+  waypoint_id int [not null,ref: > e_waypoint.id]
+  minor_id int [ref: > e_minor.id]
+  priority int [not null]
+  start_time datetime
+  end_time datetime
+  creator varchar
+  updater varchar
+  created_at datetime
+  updated_at datetime
+}
+
+// Creating tables
+Table empower_guardian as e_guardian {
+  id int [pk, increment] // auto-increment
+  user_account_id int [ref: > e_user_account.id]
+  guardian_type varchar
+}
+
+Table empower_admin as e_admin {
+  id int [pk, increment] // auto-increment
+  user_account_id int [ref: > e_user_account.id]
+}
+
+Table empower_minor_guardian as e_minor_guardian {
+  id int [pk, increment] // auto-increment
+  minor_id int [not null,ref: > e_minor.id]
+  guardian_id int [not null,ref: > e_guardian.id]
+  creator varchar
+  updater varchar
+  created_at datetime
+  updated_at datetime
+}
