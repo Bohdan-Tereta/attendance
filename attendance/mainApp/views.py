@@ -3,10 +3,11 @@ Views
 """
 from django.shortcuts import render
 from django.http import HttpResponse
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import MinorWaypointHistory
-from .serializers import MinorWaypointHistorySerializer
+from .serializers import MinorWaypointHistorySerializer, MinorWaypointHistoryPostSerializer
 
 
 
@@ -31,4 +32,12 @@ WHERE p1.minor_id_id = p2.minor_id_id AND p1.created_at = p2.max_created_at
 ''')
         serializer = MinorWaypointHistorySerializer(queryset, many=True)
         return Response(serializer.data)
-        
+    def post(self, request):
+        """
+        API endpoint that allows MinorWaypointHistory to be saved
+        """
+        serializer = MinorWaypointHistoryPostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

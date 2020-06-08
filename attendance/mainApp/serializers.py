@@ -7,7 +7,7 @@ from .models import Minor, MinorWaypointHistory, Waypoint
 
 class MinorWaypointHistorySerializer(serializers.ModelSerializer):
     """
-    MinorWaypointHistory serializer
+    MinorWaypointHistory serializer for GET
     """
     class MinorSerializer(serializers.ModelSerializer):
         """
@@ -33,6 +33,14 @@ class MinorWaypointHistorySerializer(serializers.ModelSerializer):
             fields = ['id', 'address', 'description']
     minor_id = MinorSerializer()
     waypoint_id = WaypointSerializer()
+    class Meta:
+        model = MinorWaypointHistory
+        fields = ['id', 'minor_id', 'waypoint_id', 'created_at']
+
+class MinorWaypointHistoryPostSerializer(serializers.ModelSerializer):
+    """
+    MinorWaypointHistory serializer for POST
+    """
     class Meta:
         model = MinorWaypointHistory
         fields = ['id', 'minor_id', 'waypoint_id', 'created_at']
