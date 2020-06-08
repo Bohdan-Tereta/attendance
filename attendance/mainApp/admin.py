@@ -1,3 +1,6 @@
+"""
+Admin pages
+"""
 from django.contrib import admin
 from.models import Device, Minor, MinorWaypointHistory, Waypoint
 
@@ -5,7 +8,10 @@ from.models import Device, Minor, MinorWaypointHistory, Waypoint
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    readonly_fields = ('id', 'created_at', 'updated_at','creator', 'updater')
+    """
+    Admin pages for Devices
+    """
+    readonly_fields = ('id', 'created_at', 'updated_at', 'creator', 'updater')
     def save_model(self, request, obj, form, change):
         if not obj.pk:
             # Only set added_by during the first save.
@@ -16,15 +22,24 @@ class DeviceAdmin(admin.ModelAdmin):
 
 @admin.register(Minor)
 class MinorAdmin(admin.ModelAdmin):
+    """
+    Admin pages for Minors
+    """
     list_display = ('id', 'user_id', 'current_grade')
 
 @admin.register(MinorWaypointHistory)
 class MinorWaypointHistoryAdmin(admin.ModelAdmin):
+    """
+    Admin pages for MinorWaypoints
+    """
     list_display = ('id', 'minor_id', 'waypoint_id', 'created_at')
 
 @admin.register(Waypoint)
 class WaypointAdmin(admin.ModelAdmin):
-    readonly_fields = ('id', 'created_at', 'updated_at','creator', 'updater')
+    """
+    Admin pages for Waypoints
+    """
+    readonly_fields = ('id', 'created_at', 'updated_at', 'creator', 'updater')
     def save_model(self, request, obj, form, change):
         if not obj.pk:
             # Only set added_by during the first save.

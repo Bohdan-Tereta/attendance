@@ -1,15 +1,21 @@
+"""
+Models
+"""
 from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Device(models.Model):
+    """
+    Device model
+    """
     code = models.CharField(
-        max_length=50, 
-        unique = True,
+        max_length=50,
+        unique=True,
         )
-    description  = models.CharField(max_length=50)
-    device_type  = models.CharField(max_length=50)  
+    description = models.CharField(max_length=50)
+    device_type = models.CharField(max_length=50)
     disabled = models.BooleanField()
     creator = models.ForeignKey(
         User,
@@ -27,6 +33,9 @@ class Device(models.Model):
         return self.code
 
 class Waypoint(models.Model):
+    """
+    Waypoint model
+    """
     device_id = models.OneToOneField(
         Device,
         models.CASCADE
@@ -35,8 +44,8 @@ class Waypoint(models.Model):
         max_length=50,
         unique=True
     )
-    description  = models.CharField(max_length=50)
-    address  = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
+    address = models.CharField(max_length=50)
     disabled = models.BooleanField()
     creator = models.ForeignKey(
         User,
@@ -54,6 +63,9 @@ class Waypoint(models.Model):
         return self.address
 
 class Minor(models.Model):
+    """
+    Minor model
+    """
     user_id = models.ForeignKey(
         User,
         models.CASCADE
@@ -63,6 +75,9 @@ class Minor(models.Model):
         return User.objects.filter(id=1).first().username
 
 class MinorWaypointHistory(models.Model):
+    """
+    MinorWaypointHistory model
+    """
     minor_id = models.ForeignKey(
         Minor,
         models.CASCADE

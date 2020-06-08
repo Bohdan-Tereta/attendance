@@ -1,15 +1,15 @@
+"""
+Views
+"""
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Minor, MinorWaypointHistory, Waypoint
 from rest_framework import viewsets
+from .models import Minor, MinorWaypointHistory, Waypoint
 from .serializers import MinorSerializer, MinorWaypointHistorySerializer
 
 
 
 # Create your views here.
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
 
 class MinorWaypointHistorySet(viewsets.ModelViewSet):
     """
