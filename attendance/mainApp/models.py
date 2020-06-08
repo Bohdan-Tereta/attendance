@@ -60,7 +60,7 @@ class Waypoint(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return self.address
+        return self.description
 
 class Minor(models.Model):
     """
