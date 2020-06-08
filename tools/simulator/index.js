@@ -6,7 +6,7 @@ const axios = require('axios').default;
 const apiEndpoint = "http://localhost:8000/app/api/minor-waypoint-history";
 
 let max_minor_id = 12;
-let max_timeout = 10000;
+let max_timeout = 5000;
 let max_waypoint_id = 5;
 
 let min_minor_id = 1;

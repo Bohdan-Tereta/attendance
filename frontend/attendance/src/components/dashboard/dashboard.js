@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Waypoint } from '../waypoint/waypoint';
 
 const apiEndpoint = "http://localhost:8000/app/api/minor-waypoint-history";
-const pollingInterval = 5000;
+const pollingInterval = 1000;
 
 function minorWaypointHistoryToWaypointData(minorWaypointHistory) {
   const waypointData = new Map();
@@ -27,21 +27,20 @@ export function Dashboard() {
   const [minorWaypointHistory, setMinorWaypointHistory] = useState(new Map());
   useEffect(() => {
     async function fetchData() {
+      async function getMinorWaypointHistory() {
+        try {
+          const response = await axios.get(apiEndpoint);
+          setMinorWaypointHistory(minorWaypointHistoryToWaypointData(response.data));
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+        setTimeout(getMinorWaypointHistory, pollingInterval)
+      }
       await getMinorWaypointHistory();
     }
     fetchData();
   }, []);
-
-  async function getMinorWaypointHistory() {
-    try {
-      const response = await axios.get(apiEndpoint);
-      setMinorWaypointHistory(minorWaypointHistoryToWaypointData(response.data));
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-    setTimeout(getMinorWaypointHistory, pollingInterval)
-  }
 
   return (
     <div>
