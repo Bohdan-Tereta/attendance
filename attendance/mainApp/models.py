@@ -72,7 +72,7 @@ class Minor(models.Model):
     )
     current_grade = models.PositiveSmallIntegerField()
     def __str__(self):
-        return User.objects.filter(id=1).first().username
+        return User.objects.filter(id=self.user_id.id).first().username
 
 class MinorWaypointHistory(models.Model):
     """
