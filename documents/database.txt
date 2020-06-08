@@ -1,3 +1,5 @@
+This is not a final version, requires modifications
+
 Table document_version {
  version int [default: 2]
 }
