@@ -1,12 +1,12 @@
-#Project Attendace
+# Project Attendace
 
-##Description
+## Description
 
 Children living in homes across Japan are unmonitored for large parts of the day. 
 Between traveling from home to school to school clubs to tutoring and back to home, staff, caregivers, and administrators often have no idea where the children are. 
 Our goal will be to build a platform using a fingerprint hardware to keep track of the children's movements and ensure their safety.
 
-##How to run:
+## How to run:
 
 1. Backend: go to backend folder (requires python 3)
 
@@ -42,7 +42,7 @@ simulator will start send minorWaypointHistory messages to backend with random p
 
 
 
-##Useful commands:
+## Useful commands:
 
 create venv: ```python3 -m venv attendance-env```
 
