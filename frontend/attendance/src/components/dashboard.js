@@ -5,8 +5,26 @@ import { Waypoint } from './waypoint';
 const apiEndpoint = "http://localhost:8000/app/api/minor-waypoint-history";
 const pollingInterval = 5000;
 
+function minorWaypointHistoryToWaypointData(minorWaypointHistory) {
+  const waypointData = new Map();
+  minorWaypointHistory.forEach(entry => {
+    if (!waypointData.has(entry.waypoint_id.id)) {
+      waypointData.set(
+        entry.waypoint_id.id,
+        {
+          waypoint: entry.waypoint_id,
+          minors: [entry.minor_id]
+        }
+      )
+    } else {
+      waypointData.get(entry.waypoint_id.id).minors.push(entry.minor_id) ;
+    }
+  });
+  return waypointData;
+}
+
 export function Dashboard() {
-  const [minorWaypointHistory, setMinorWaypointHistory] = useState([]);
+  const [minorWaypointHistory, setMinorWaypointHistory] = useState(new Map());
   useEffect(() => {
     async function fetchData() {
       await getMinorWaypointHistory();
@@ -17,7 +35,7 @@ export function Dashboard() {
   async function getMinorWaypointHistory() {
     try {
       const response = await axios.get(apiEndpoint);
-      setMinorWaypointHistory(response.data);
+      setMinorWaypointHistory(minorWaypointHistoryToWaypointData(response.data));
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -28,7 +46,7 @@ export function Dashboard() {
   return (
     <div>
       <ul>
-        {minorWaypointHistory.map(entry =>
+        {Array.from(minorWaypointHistory).map(entry =>
           <Waypoint waypointData={entry}></Waypoint>
         )}
       </ul>
