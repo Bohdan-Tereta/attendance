@@ -20,7 +20,7 @@ class MinorWaypointHistorySerializer(serializers.ModelSerializer):
             class Meta:
                 model = User
                 fields = ['id', 'username', 'first_name', 'last_name']
-        user_id = UserSerializer
+        user_id = UserSerializer()
         class Meta:
             model = Minor
             fields = ['id', 'current_grade', 'user_id']
