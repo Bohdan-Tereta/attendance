@@ -1,0 +1,20 @@
+.minor_block {
+  font-size: 0.7em;
+  display: none;
+}
+
+.waypoint_block:hover {
+  background-color: darkslategray;
+  transition: 0.3s;
+  & .minor_block {
+    display: block;
+  }
+} 
+
+.waypoint_block {
+  transition: 0.3s;
+} 
+
+li {
+  list-style-type: none;
+}

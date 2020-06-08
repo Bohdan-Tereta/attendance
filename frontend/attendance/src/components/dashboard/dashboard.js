@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Waypoint } from './waypoint';
+import { Waypoint } from '../waypoint/waypoint';
 
 const apiEndpoint = "http://localhost:8000/app/api/minor-waypoint-history";
 const pollingInterval = 5000;
