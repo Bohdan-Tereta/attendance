@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Waypoint } from './waypoint';
 
 const apiEndpoint = "http://localhost:8000/app/api/minor-waypoint-history";
 const pollingInterval = 5000;
@@ -28,9 +29,7 @@ export function Dashboard() {
     <div>
       <ul>
         {minorWaypointHistory.map(entry =>
-          <li key={entry.id}>
-            {JSON.stringify(entry)}
-          </li>
+          <Waypoint waypointData={entry}></Waypoint>
         )}
       </ul>
     </div>
